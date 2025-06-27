@@ -43,6 +43,7 @@ public class PrimaryController {
     // does adding items to the queue also updates an iterator made before or not
     ListIterator<Cancion> inter = lista.listIterator(); // beed to work on this, maybe adding a controller to separate
     SimpleAudioPlayer player = new SimpleAudioPlayer(inter); // i think it plays the first song
+    ListIterator<Cancion> rotafoto = lista.listIterator();
     //REVISAR SI ESTO NO ES UN ITERADOR DOBLE DE LA MISMA COSA
     //need to find current song
     // could change the iterator in the music playlist
@@ -65,8 +66,7 @@ public class PrimaryController {
     private void siguiente() throws IOException {
  
         player.playNextSong();
-        inter.next();
-        File file = new File(inter.previous().getFoto()); // should get the path for the photo
+        File file = new File(rotafoto.next().getFoto()); // should get the path for the photo
         Image img = new Image(file.toURI().toString()); //  esto lo vuelve imagen
         fotoAlbum.setImage(img); // creo que hare nomas 3 iteradores y lo dejo ahi pero no quiero la verdad
         // tal vez si diseno mejor el circular podria dejarme lo de iteradores y usar el queue con su current y 
@@ -78,8 +78,7 @@ public class PrimaryController {
     private void reversa() throws IOException {
  
         player.playPreviousSong();
-        inter.next();
-        File file = new File(inter.previous().getFoto()); // should get the path for the photo
+        File file = new File(rotafoto.previous().getFoto()); // should get the path for the photo
         Image img = new Image(file.toURI().toString()); //  esto lo vuelve imagen
         fotoAlbum.setImage(img); // creo que hare nomas 3 iteradores y lo dejo ahi pero no quiero la verdad
         // tal vez si diseno mejor el circular podria dejarme lo de iteradores y usar el queue con su current y 
