@@ -26,11 +26,16 @@ public class SimpleAudioPlayer {
         stop(); // Stop current if playing
 
         URL resource = getClass().getResource("/" + filePath);// en vez de resource path
-        File audioFile = new File(filePath);
+        if (resource == null) {
+            System.out.println("❌ Resource not found: " + filePath);
+            return;
+        }
+        
+        /*File audioFile = new File(filePath);
         if (!audioFile.exists()) {
             System.out.println("❌ File not found: " + filePath);
             return;
-        }
+        }*/
 
         Media media = new Media(resource.toExternalForm()); // cambie esto revisar
         mediaPlayer = new MediaPlayer(media);

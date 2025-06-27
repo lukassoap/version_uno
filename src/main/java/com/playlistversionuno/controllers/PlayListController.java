@@ -56,9 +56,7 @@ public class PlayListController {
             ResultSet resultSet = statement.executeQuery();
             while (resultSet.next()){
                 int idcancion = resultSet.getInt("idcancion");
-                String rawPathFromDB = resultSet.getString("nombrecancion");
-                URL resource = getClass().getResource("/" + rawPathFromDB);
-                String nombre = (resource != null) ? resource.toExternalForm() : ""; // media path
+                String nombre = resultSet.getString("nombrecancion"); //vuelve a como era antes
                 String foto = resultSet.getString("nombrefoto");
                 canciones.addLast(new Cancion(idcancion, nombre, foto));
                 
