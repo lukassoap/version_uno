@@ -41,8 +41,8 @@ public class PrimaryController {
     DoublyLinkedList<Cancion> lista = Playlist.Read(); // might have to do this outside
     //could use iterators for adding without having to redo the iterator but need to ask
     // does adding items to the queue also updates an iterator made before or not
-    ListIterator<Cancion> inter = lista.listIterator(); // beed to work on this, maybe adding a controller to separate
-    SimpleAudioPlayer player = new SimpleAudioPlayer(inter); // i think it plays the first song
+    //ListIterator<Cancion> inter = lista.listIterator(); // beed to work on this, maybe adding a controller to separate
+    SimpleAudioPlayer player = new SimpleAudioPlayer(lista); // i think it plays the first song
     ListIterator<Cancion> rotafoto = lista.listIterator();
     //REVISAR SI ESTO NO ES UN ITERADOR DOBLE DE LA MISMA COSA
     //need to find current song
@@ -70,8 +70,7 @@ public class PrimaryController {
         Image img = new Image(file.toURI().toString()); //  esto lo vuelve imagen
         fotoAlbum.setImage(img); // creo que hare nomas 3 iteradores y lo dejo ahi pero no quiero la verdad
         // tal vez si diseno mejor el circular podria dejarme lo de iteradores y usar el queue con su current y 
-        //pasarmelo por los huevos pero me da pereza
-        
+        //pasarmelo por los huevos pero me da pereza        
     }
     
     @FXML

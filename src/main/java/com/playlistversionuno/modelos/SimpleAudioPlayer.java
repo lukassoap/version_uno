@@ -9,16 +9,32 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ListIterator;
+import java.util.Scanner;
+import java.util.List;
+
+import com.playlistversionuno.modelos.DoublyLinkedList;
+/**
+ *
+ * @author yacog
+ * This class is a simple audio player that can play, pause, resume, stop, and jump to specific times in songs.
+ * It uses JavaFX's MediaPlayer to handle audio playback.
+ */
 
 public class SimpleAudioPlayer {
     private MediaPlayer mediaPlayer;
     private String currentSong;
-    private ListIterator<Cancion> iterator;// or could change this //  changing for cancion
+    //private ListIterator<Cancion> iterator;// or could change this //  changing for cancion
+    private List<Cancion> songs;
+    private int currentIndex = -1;
     private boolean isManualStop = false;
 
-    public SimpleAudioPlayer(ListIterator<Cancion> iterator) {
-        this.iterator = iterator;
+    public SimpleAudioPlayer(DoublyLinkedList<Cancion> lista) {
+        this.songs = new ArrayList<>();
+        for (Cancion c : lista) {
+            songs.add(c);
+        }
         playNextSong(); // Start with the first song
     }
 
@@ -30,7 +46,7 @@ public class SimpleAudioPlayer {
             System.out.println("❌ Resource not found: " + filePath);
             return;
         }
-        
+
         /*File audioFile = new File(filePath);
         if (!audioFile.exists()) {
             System.out.println("❌ File not found: " + filePath);
@@ -56,21 +72,23 @@ public class SimpleAudioPlayer {
     }
 
     public void playNextSong() {
-        if (iterator.hasNext()) {
-            String next = iterator.next().getTitulo();
-            playSong(next);
-        } else {
-            System.out.println("🎵 No next song.");
+        if (songs.isEmpty()) {
+            System.out.println("🎵 Playlist empty.");
+            return;
         }
+        currentIndex = (currentIndex + 1) % songs.size();
+        Cancion next = songs.get(currentIndex);
+        playSong(next.getTitulo());
     }
 
     public void playPreviousSong() {
-        if (iterator.hasPrevious()) {
-            String prev = iterator.previous().getTitulo();
-            playSong(prev);
-        } else {
-            System.out.println("🎵 No previous song.");
+        if (songs.isEmpty()) {
+            System.out.println("🎵 Playlist empty.");
+            return;
         }
+        currentIndex = (currentIndex - 1 + songs.size()) % songs.size();
+        Cancion prev = songs.get(currentIndex);
+        playSong(prev.getTitulo());
     }
 
     public void pause() {
@@ -127,5 +145,12 @@ public class SimpleAudioPlayer {
             case 7: playPreviousSong(); break;
             default: System.out.println("❌ Invalid choice.");
         }
+    }
+    /**
+     * Expose the playlist as a standard iterator. This does not affect the
+     * internal playback index so the player remains in sync.
+     */
+    public ListIterator<Cancion> listIterator() {
+        return songs.listIterator();
     }
 }
