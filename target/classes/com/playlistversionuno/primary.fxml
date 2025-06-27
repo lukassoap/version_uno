@@ -28,7 +28,7 @@
             </HBox>
          </children>
       </VBox>
-      <TextArea layoutX="321.0" layoutY="147.0" prefHeight="38.0" prefWidth="213.0" />
+      <TextArea fx:id="textArea" layoutX="321.0" layoutY="147.0" prefHeight="38.0" prefWidth="213.0" editable="false" />
       <Label layoutX="321.0" layoutY="91.0" text="SONG NAME:">
          <font>
             <Font size="23.0" />

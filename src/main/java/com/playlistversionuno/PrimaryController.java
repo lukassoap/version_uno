@@ -12,6 +12,7 @@ package com.playlistversionuno;
 // import your.correct.package.SimpleAudioPlayer;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.util.ListIterator;
 
 import com.playlistversionuno.controllers.PlayListController;
@@ -53,10 +54,12 @@ public class PrimaryController {
     // acutually nvm CHANGE THE MEDIA PLAYER TO TAKE ITERATOR WITH MUSIC CLASS OBJECTS TSO IT WORKS CORRECTLY AND VOILA
     // could also say fuck it and make a photo controller or
     //makre a dedicated thiung in the class for audio player but it would feel pointless
+    //PROBANDO ESTO
     
     @FXML
     private void initialize() throws IOException{
-        
+        URL imgUrl = getClass().getResource("/" + rotafoto.next().getFoto());
+        fotoAlbum.setImage(new Image(imgUrl.toExternalForm()));
     }
     
     
@@ -69,20 +72,19 @@ public class PrimaryController {
     private void siguiente() throws IOException {
  
         player.playNextSong();
-        File file = new File(rotafoto.next().getFoto()); // should get the path for the photo
-        Image img = new Image(file.toURI().toString()); //  esto lo vuelve imagen
-        fotoAlbum.setImage(img); // creo que hare nomas 3 iteradores y lo dejo ahi pero no quiero la verdad
+        URL imgUrl = getClass().getResource("/" + rotafoto.next().getFoto());
+        fotoAlbum.setImage(new Image(imgUrl.toExternalForm())); // creo que hare nomas 3 iteradores y lo dejo ahi pero no quiero la verdad
         // tal vez si diseno mejor el circular podria dejarme lo de iteradores y usar el queue con su current y 
         //pasarmelo por los huevos pero me da pereza        
+        //System.out.println(file);
     }
     
     @FXML
     private void reversa() throws IOException {
  
         player.playPreviousSong();
-        File file = new File(rotafoto.previous().getFoto()); // should get the path for the photo
-        Image img = new Image(file.toURI().toString()); //  esto lo vuelve imagen
-        fotoAlbum.setImage(img); // creo que hare nomas 3 iteradores y lo dejo ahi pero no quiero la verdad
+        URL imgUrl = getClass().getResource("/" + rotafoto.previous().getFoto());
+        fotoAlbum.setImage(new Image(imgUrl.toExternalForm()));
         // tal vez si diseno mejor el circular podria dejarme lo de iteradores y usar el queue con su current y 
         //pasarmelo por los huevos pero me da pereza
         

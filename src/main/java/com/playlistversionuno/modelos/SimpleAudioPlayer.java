@@ -153,4 +153,13 @@ public class SimpleAudioPlayer {
     public ListIterator<Cancion> listIterator() {
         return songs.listIterator();
     }
+    /**
+     * Returns the currently playing song or null if none is loaded.
+     */
+    public Cancion getCurrentSong() {
+        if (songs.isEmpty() || currentIndex < 0 || currentIndex >= songs.size()) {
+            return null;
+        }
+        return songs.get(currentIndex);
+    }
 }
