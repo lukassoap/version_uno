@@ -21,6 +21,7 @@ import com.playlistversionuno.modelos.SimpleAudioPlayer;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
@@ -36,6 +37,8 @@ public class PrimaryController {
     Button btnforward;
     @FXML
     ImageView fotoAlbum;
+    @FXML
+    TextArea textArea; // this is not used but could be used to show the current song or something
     
     PlayListController Playlist = new PlayListController();
     DoublyLinkedList<Cancion> lista = Playlist.Read(); // might have to do this outside
